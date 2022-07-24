@@ -5,17 +5,23 @@ const butInstall = document.getElementById('buttonInstall');
 window.addEventListener('beforeinstallprompt', (event) => {
     // Prevent Chrome 67 and earlier from automatically showing the prompt
     event.preventDefault();
-    // Stash the event so it can be triggered later.
-    butInstall.hidden = false;
-    butInstall.addEventListener('click', (event) => {
-        event.prompt();
-        butInstall.setAttribute('disabled', true);
-        butInstall.textContent = 'Installed';
-    });
+    butInstall.classList.toggle('hidden', false);
+
 });
+
+    butInstall.addEventListener('click', (event) => {
+        const promptEvent = window.defferedPrompt();
+        if (promptEvent) {
+            return;
+        }
+        promptEvent.prompt();
+        window.defferedPrompt = null;
+        butInstall.setAttribute('disabled', true);
+     
+    });
+
 
 // TODO: Add an handler for the `appinstalled` event
 window.addEventListener('appinstalled', (event) => {
-    textHeader.textContent = 'Installed Successfully';
-    console.log('Installed Successfully', event);
+    window.defferedPrompt = null;
 });
