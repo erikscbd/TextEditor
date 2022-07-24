@@ -21,7 +21,24 @@ module.exports = () => {
       new HtmlWebpackPlugin({
         template: './index.html',
         title: 'Jate App'
-      })
+      }),
+      new WebpackPwaManifest({
+        name: 'Jate App',
+        short_name: 'Jate',
+        description: 'A simple todo list app',
+        background_color: '#7eb4e2',
+        theme_color: '#7eb4e2',
+        start_url: '/',
+        publicPath: '/',
+        icons: [ 
+          {
+          src: path.resolve('assets/images/logo.png'),
+          sizes: [96, 128, 192, 256, 384, 512],
+          destination: path.join('assets', 'icons'), 
+        },
+        ]
+      }),
+      
       
     ],
 
