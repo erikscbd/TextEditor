@@ -22,6 +22,11 @@ module.exports = () => {
         template: './index.html',
         title: 'Jate App'
       }),
+      new InjectManifest({ 
+        swSrc: './src/js/sw.js',
+        swDest: 'sw.js',
+
+      }),
       new WebpackPwaManifest({
         name: 'Jate App',
         short_name: 'Jate',
@@ -44,7 +49,10 @@ module.exports = () => {
 
     module: {
       rules: [
-        
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },        
       ],
     },
   };
