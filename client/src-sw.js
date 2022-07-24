@@ -31,14 +31,15 @@ registerRoute(({ request}) => {
   return (
     request.destination === 'script' || 
     request.destination === 'style' || 
-    request.destination === 'image'
-    ), new StaleWhileRevalidate({
+    request.destination === 'worker'
+    );
+  }, new StaleWhileRevalidate({
       cacheName: 'asset-cache',
       plugins: [
         new CacheableResponsePlugin({
           statuses: [0, 200],
-        })
-      ] 
+        }),
+      ], 
     
   })
-});
+);

@@ -23,14 +23,17 @@ module.exports = () => {
         title: 'Jate App'
       }),
       new InjectManifest({ 
-        swSrc: './src/js/sw.js',
+        swSrc: './.sw-src.js',
         swDest: 'sw.js',
 
       }),
       new WebpackPwaManifest({
+        
         name: 'Jate App',
         short_name: 'Jate',
-        description: 'A simple todo list app',
+        description: 'Take notes and share them with your friends',
+        fingerprints: false,
+        inject: true,
         background_color: '#7eb4e2',
         theme_color: '#7eb4e2',
         start_url: '/',
